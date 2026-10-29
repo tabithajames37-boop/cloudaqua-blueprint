@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CloudAqua Blueprint™ – Prototype</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EAF3F3;--ink:#0A2A33;--mut:#4F6D75;--card:rgba(255,255,255,.72);--line:rgba(10,42,51,.12);--a:#0B857C;--a2:#E8603F;--on:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#07161B;--ink:#E6F2F2;--mut:#93B3B8;--card:rgba(20,48,56,.65);--line:rgba(230,242,242,.15);--a:#3CCBBC;--on:#06222A}}
+:root[data-theme="dark"]{--bg:#07161B;--ink:#E6F2F2;--mut:#93B3B8;--card:rgba(20,48,56,.65);--line:rgba(230,242,242,.15);--a:#3CCBBC;--on:#06222A}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 "Instrument Sans",system-ui,sans-serif}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:700;line-height:1.1;margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--a2);outline-offset:2px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+.btn{background:var(--a2);color:#fff;border:0;border-radius:999px;padding:14px 26px;font-weight:600}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.card{background:var(--card);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:24px;box-shadow:0 1px 2px rgba(10,42,51,.06),0 14px 34px rgba(10,42,51,.08);padding:24px}
+.hero{background:linear-gradient(170deg,#0A2A33 0%,#0B5D63 55%,#2FB3A5 100%);color:#fff;padding:56px 0 40px;overflow:hidden}
+.hero .wrap{display:grid;gap:28px;grid-template-columns:1fr 1fr;align-items:center}
+.hero h1{font-size:clamp(2.4rem,6vw,4.2rem)}
+.hero p{font-size:1.15rem;max-width:30em;opacity:.9}
+.hero .tag{font-family:Fraunces,serif;font-size:1.5rem;margin:10px 0 12px;opacity:.95}
+.grid3{display:grid;gap:16px;grid-template-columns:repeat(3,1fr)}
+.sec{padding:48px 0}
+.sec h2{font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:20px}
+.jc{text-align:left;width:100%;transition:transform .2s}
+.jc:hover{transform:translateY(-3px)}
+.jc h3{font-size:1.35rem;margin-bottom:6px}.jc span{color:var(--mut)}
+.app{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:28px;padding:28px 20px 120px;max-width:1100px;margin:0 auto}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;max-width:1100px;margin:0 auto}
+.logo{font-family:Fraunces,serif;font-weight:700;font-size:1.15rem;background:none;border:0}
+.bar{height:6px;border-radius:9px;background:var(--line);overflow:hidden}.bar i{display:block;height:100%;background:var(--a);border-radius:9px;transition:width .6s}
+.q h2{font-size:clamp(1.7rem,4vw,2.5rem);margin:18px 0 22px}
+.opts{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.opt{text-align:left;background:var(--card);border:1.5px solid var(--line);border-radius:20px;padding:20px;min-height:104px;transition:all .2s}
+.opt:hover{border-color:var(--a);transform:translateY(-2px)}
+.opt.on{border-color:var(--a);box-shadow:0 0 0 3px color-mix(in srgb,var(--a) 25%,transparent)}
+.opt b{display:block;font-size:1.1rem}.opt small{color:var(--mut)}
+.side{position:sticky;top:16px;align-self:start}
+.side h3{font-size:1.1rem;margin-bottom:12px}
+.row{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:.93rem}.row span:first-child{color:var(--mut)}
+.big{font-family:Fraunces,serif;font-size:2.8rem;font-weight:700;line-height:1}
+.dim{margin:10px 0}.dim div{display:flex;justify-content:space-between;font-size:.9rem}
+.fade{animation:in .35s ease}
+@keyframes in{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+.res{max-width:1100px;margin:0 auto;padding:10px 20px 60px;display:grid;gap:22px}
+.res h2{font-size:1.7rem;margin-bottom:14px}
+.two{display:grid;gap:22px;grid-template-columns:1.3fr 1fr}
+.aq svg{width:100%;height:auto;border-radius:18px;display:block}
+.hs{cursor:pointer}.hs circle:first-child{fill:rgba(255,255,255,.35)}.hs circle:last-child{fill:#E8603F;stroke:#fff;stroke-width:2}
+@media(prefers-reduced-motion:no-preference){.hs circle:first-child{animation:pu 2s infinite;transform-box:fill-box;transform-origin:center}@keyframes pu{50%{transform:scale(1.5);opacity:.3}}.bub{animation:rise 5s linear infinite}@keyframes rise{from{transform:translateY(0);opacity:.9}to{transform:translateY(-190px);opacity:0}}}
+.item{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.item small{color:var(--mut);display:block}
+.pill{font-size:.78rem;padding:2px 10px;border-radius:99px;background:color-mix(in srgb,var(--a) 18%,transparent);color:var(--a);font-weight:600}
+.rm{background:none;border:1px solid var(--line);border-radius:99px;padding:6px 12px;font-size:.85rem}
+.road{display:grid;gap:12px;grid-template-columns:repeat(4,1fr)}.road b{font-family:Fraunces,serif;font-size:1.1rem}.road ul{padding-left:18px;margin:8px 0 0;color:var(--mut);font-size:.92rem}
+input[type=text],input[type=email],input[type=tel]{width:100%;padding:13px 14px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;margin-bottom:10px}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:12px 20px;border-radius:99px;z-index:30;max-width:90vw}
+.th{width:56px;height:56px;flex:none;border-radius:16px;background:linear-gradient(135deg,#0B857C,#0A2A33);padding:14px}.hl{display:grid;grid-template-columns:150px 1fr;gap:22px;align-items:center}@media(max-width:600px){.hl{grid-template-columns:1fr;justify-items:center}.hl>div:last-child{width:100%}}@media(prefers-reduced-motion:no-preference){.gc{animation:dr 1.2s ease-out}@keyframes dr{from{stroke-dasharray:0 327}}}
+.mob{display:none}
+@media(max-width:900px){
+.hero .wrap,.two{grid-template-columns:1fr}.grid3,.road{grid-template-columns:1fr}
+.app{grid-template-columns:1fr;padding-bottom:140px}
+.side{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:20;border-radius:24px 24px 0 0;padding:14px 20px calc(14px + env(safe-area-inset-bottom,0px))}
+.side .more{display:none;max-height:55vh;overflow:auto}.side.open .more{display:block}
+.mob{display:flex;justify-content:space-between;align-items:center;width:100%;background:none;border:0;padding:0}
+.side>h3{display:none}.side .sum{display:none}
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="toast"></div>
+<script>
+const $=s=>document.querySelector(s);
+const GBP=n=>"£"+n.toLocaleString("en-GB");
+const SIZE=["Nano (under 30 L)","Small (30–80 L)","Medium (80–200 L)","Large (200 L+)"];
+const CAP=[150,400,800,1500];
+const JN={beg:"Beginner",exist:"Existing aquarium",proj:"New project"};
+const GOAL={plant:"Lush planted garden",comm:"Easy community tank",show:"Aquascape showpiece"};
+const DIM={l:"Lighting",f:"Filtration",m:"Maintenance",p:"Plant Success",a:"Aquascaping Potential"};
+
+/* ---------- Questions (data-driven, with branching) ---------- */
+const Q=[
+{id:"goal",t:"What should your aquarium become?",o:[["plant","Lush planted garden","Thriving greens, healthy fish"],["comm","Easy community tank","Colourful fish, low fuss"],["show","Aquascape showpiece","Sculpted hardscape, show-level layout"]]},
+{id:"size",t:"How big is the tank?",o:[[0,"Nano","Under 30 litres"],[1,"Small","30–80 litres"],[2,"Medium","80–200 litres"],[3,"Large","200 litres and up"]]},
+{id:"gear",t:"What is already running?",skip:s=>s.journey!=="exist",o:[["tank","Just the tank","Everything else is new"],["basic","Tank, filter and heater","Needs light and planting"],["full","A full setup","Ready for upgrades"]]},
+{id:"plants",t:"How demanding are your plants?",skip:s=>s.a.goal==="comm",o:[["easy","Easy and hardy","Anubias, ferns, mosses"],["mid","A bit of everything","Stems with some carpeting"],["hard","Demanding","Carpets and red stems"]]},
+{id:"maint",t:"How much time each week?",o:[["min","Under an hour","Keep it automatic"],["week","A couple of hours","Regular routine"],["pro","As long as it takes","Hands-on hobbyist"]]},
+{id:"budget",t:"What is your budget?",o:[[0,"Up to £150",""],[1,"Around £400",""],[2,"Around £800",""],[3,"£1,500 or more",""]]},
+{id:"pain",t:"What worries you most?",skip:s=>s.journey==="proj",o:[["algae","Algae",""],["time","Keeping up with maintenance",""],["know","Knowing what to buy",""],["look","Making it look beautiful",""]]}
+];
+
+/* ---------- Product catalogue + rules (configuration, not logic) ---------- */
+const P=[
+{id:"tank",n:"Rimless low-iron glass tank",z:"tank",pr:1,price:[60,120,220,420],d:"a",pts:10,w:(a,j)=>j!=="exist",why:"Low-iron glass keeps colours true and gives a clean, frameless view.",imp:"Foundation for the whole Blueprint"},
+{id:"filter",n:"CloudAqua canister filter",z:"filter",pr:1,price:[40,90,180,320],d:"f",pts:40,w:()=>true,why:"Sized to your tank volume so water stays clear and stable.",imp:"Biggest single lift to Filtration"},
+{id:"heater",n:"Thermostat heater",z:"heater",pr:1,price:[20,30,45,70],d:"f",pts:15,w:()=>true,why:"Holds a steady temperature, which keeps fish and plants calm.",imp:"Prevents stress-related losses"},
+{id:"light",n:"Full-spectrum LED light",z:"light",pr:1,price:[45,95,170,260],d:"l",pts:45,w:()=>true,why:"Right intensity for your plants, with a timer to curb algae.",imp:"Drives plant growth and colour"},
+{id:"sub",n:"Nutrient-rich aqua soil",z:"substrate",pr:1,price:[25,40,70,120],d:"p",pts:20,w:a=>a.goal!=="comm",why:"Feeds roots directly and buffers water for planted tanks.",imp:"Faster, stronger plant establishment"},
+{id:"plants",n:"Starter plant collection",z:"plants",pr:2,price:[30,45,80,130],d:"p",pts:25,w:()=>true,why:"A balanced mix that uses up nutrients before algae can.",imp:"Natural algae defence"},
+{id:"co2",n:"Pressurised CO₂ kit",z:"co2",pr:2,price:[110,140,190,260],d:"p",pts:25,w:a=>a.goal!=="comm"&&a.plants!=="easy",why:"Demanding plants need CO₂ to carpet and colour up properly.",imp:"Unlocks premium plant species"},
+{id:"wood",n:"Spiderwood hardscape set",z:"wood",pr:2,price:[30,50,90,150],d:"a",pts:30,w:a=>a.goal!=="comm",why:"Gives your layout structure, depth and a natural focal point.",imp:"Big gain in Aquascaping Potential"},
+{id:"rocks",n:"Seiryu stone set",z:"rocks",pr:3,price:[25,40,70,110],d:"a",pts:25,w:a=>a.goal==="show",why:"Sharp, layered stone is the signature of show-level scapes.",imp:"Competition-style composition"},
+{id:"dose",n:"Liquid fertiliser system",z:"plants",pr:3,price:[20,25,35,50],d:"p",pts:15,w:a=>a.goal!=="comm"&&a.plants!=="easy",why:"Supplies the nutrients soil alone cannot sustain.",imp:"Keeps growth consistent"},
+{id:"test",n:"Water test kit",z:null,pr:2,price:[25,25,25,25],d:"m",pts:25,w:()=>true,why:"Lets you catch problems before fish or plants show them.",imp:"Confidence in the first month"},
+{id:"wc",n:"Water-change kit",z:null,pr:2,price:[20,25,30,40],d:"m",pts:20,w:()=>true,why:"Makes weekly changes quick and mess-free.",imp:"Cuts maintenance time"},
+{id:"atop",n:"Auto top-off system",z:null,pr:3,price:[60,75,90,110],d:"m",pts:30,w:a=>a.maint==="min",why:"Replaces evaporated water automatically.",imp:"Hands-off routine"}
+];
+const OWN={tank:["tank"],basic:["tank","filter","heater"],full:["tank","filter","heater","light"]};
+/* Mock catalogue details: brand, rating, reviews, spec */
+const MOCK={tank:["AquaForm","4.8",212,"Low-iron glass, polished edges"],filter:["CloudAqua","4.7",386,"Quiet canister, 3-stage media"],heater:["ThermoPure","4.6",541,"Titanium, ±0.5°C control"],light:["LumaReef","4.9",298,"Full-spectrum, app timer"],sub:["TerraGrow","4.7",174,"Aqua soil, nutrient-rich"],plants:["VerdeLab","4.5",260,"12 species, tissue culture"],co2:["PureFlow","4.8",143,"Regulator, solenoid, diffuser"],wood:["Driftcraft","4.6",98,"Hand-picked, pre-soaked"],rocks:["StoneCo","4.7",76,"Layered grey stone, 5 kg"],dose:["GrowDrops","4.5",120,"Macro and micro, 500 ml"],test:["AquaCheck","4.8",620,"Liquid reagents, 5 tests"],wc:["CloudAqua","4.6",210,"Siphon and bucket adapter"],atop:["LevelWise","4.4",67,"Sensor and reservoir pump"]};
+const ICON={tank:'<rect x="3" y="6" width="18" height="12" rx="2"/>',filter:'<rect x="8" y="3" width="8" height="14" rx="2"/><path d="M12 17v4"/>',heater:'<rect x="10" y="3" width="4" height="16" rx="2"/>',light:'<rect x="3" y="5" width="18" height="4" rx="2"/><path d="M7 12l-2 5M12 12v6M17 12l2 5"/>',sub:'<path d="M3 17c4-6 8-6 18 0v3H3z"/>',plants:'<path d="M12 21V9M12 13c-4 0-6-3-6-6 4 0 6 2 6 6zM12 15c4 0 6-3 6-6-4 0-6 2-6 6z"/>',co2:'<rect x="8" y="5" width="8" height="15" rx="3"/><path d="M10 3h4"/>',wood:'<path d="M4 19c4-2 5-8 10-10l4-4M9 14l-3-3"/>',rocks:'<path d="M3 19l5-9 4 5 3-6 6 10z"/>',dose:'<rect x="9" y="8" width="6" height="12" rx="2"/><path d="M11 3h2v5h-2z"/>',test:'<path d="M9 3h6M10 3v8l-4 8h12l-4-8V3"/>',wc:'<path d="M5 8h14l-2 12H7zM9 8V5h6v3"/>',atop:'<path d="M12 3c4 5 6 8 6 11a6 6 0 0 1-12 0c0-3 2-6 6-11z"/>'};
+const thumb=id=>`<svg class="th" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[id]}</svg>`;
+const meta=id=>{const m=MOCK[id];return `${m[0]} · ${m[3]} · ★ ${m[1]} (${m[2]})`};
+function health(p){const w=Math.round(p.sc.f*.6+p.sc.m*.4),pl=p.sc.p,al=Math.round(p.sc.l*.4+p.sc.p*.3+p.sc.m*.3),fw=Math.round(p.sc.f*.7+p.sc.m*.3);return{all:Math.round((w+pl+al+fw)/4),rows:[["Water stability",w],["Plant vitality",pl],["Algae resistance",al],["Fish welfare",fw]]}}
+function healthCard(p){const h=health(p),s=h.all>=85?"Thriving":h.all>=70?"Healthy":"Needs attention";return `<div class="card"><h2>Projected aquarium health</h2><div class="hl"><svg viewBox="0 0 120 120" width="150" height="150" role="img" aria-label="Health ${h.all} out of 100"><circle cx="60" cy="60" r="52" fill="none" stroke="var(--line)" stroke-width="12"/><circle class="gc" cx="60" cy="60" r="52" fill="none" stroke="var(--a)" stroke-width="12" stroke-linecap="round" stroke-dasharray="${(h.all*3.267).toFixed(0)} 327" transform="rotate(-90 60 60)"/><text x="60" y="68" text-anchor="middle" font-size="30" font-family="Fraunces,serif" font-weight="700" fill="var(--ink)">${h.all}</text></svg><div>${h.rows.map(r=>`<div class="dim"><div><span>${r[0]}</span><span>${r[1]}</span></div><div class="bar"><i style="width:${r[1]}%"></i></div></div>`).join("")}<p style="color:var(--mut);font-size:.9rem;margin:10px 0 0"><b style="color:var(--ink)">${s}.</b> A typical unplanned setup might score around ${Math.round(h.all*.55)} (illustrative).</p></div></div></div>`}
+
+/* ---------- State ---------- */
+const S={view:"landing",journey:null,a:{},step:0,open:false};
+const D={goal:"plant",size:1,gear:"tank",plants:"mid",maint:"week",budget:1,pain:"know"};
+const A=()=>({...D,...S.a});
+const steps=()=>Q.filter(q=>!(q.skip&&q.skip(S)));
+
+/* ---------- Recommendation engine (UI-free) ---------- */
+function plan(){
+ const a=A(),j=S.journey||"beg",own=j==="exist"?OWN[a.gear]:[];
+ let c=P.filter(p=>!own.includes(p.id)&&p.w(a,j)).map(p=>({...p,cost:p.price[a.size]}));
+ c.sort((x,y)=>x.pr-y.pr);
+ const inc=[];let tot=0;
+ c.forEach(p=>{if(p.pr===1||tot+p.cost<=CAP[a.budget]){inc.push(p);tot+=p.cost}});
+ const sc={l:30,f:30,m:30,p:30,a:30};
+ inc.concat(P.filter(p=>own.includes(p.id))).forEach(p=>sc[p.d]=Math.min(100,sc[p.d]+p.pts));
+ if(a.goal==="comm"){sc.p=Math.max(sc.p,60);sc.a=Math.max(sc.a,55)}
+ const all=Math.round(Object.values(sc).reduce((x,y)=>x+y,0)/5);
+ return{inc,tot,sc,all,over:Math.max(0,tot-CAP[a.budget]),own};
+}
+
+/* ---------- Views ---------- */
+function aq(inter){
+ const h=(z,x,y)=>inter?`<g class="hs" data-z="${z}" tabindex="0" role="button" aria-label="${z}"><circle cx="${x}" cy="${y}" r="15"/><circle cx="${x}" cy="${y}" r="7"/></g>`:"";
+ return `<svg viewBox="0 0 600 340" role="img" aria-label="Illustrated aquarium"><defs><linearGradient id="w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7FE0D2"/><stop offset="1" stop-color="#0E6F78"/></linearGradient></defs>
+<rect width="600" height="340" fill="url(#w)"/><rect x="40" y="18" width="520" height="14" rx="7" fill="#0A2A33"/><rect x="40" y="300" width="520" height="40" fill="#5B3A29"/>
+<path d="M120 300 q60-90 130-40 q40 20 90 40z" fill="#3E2A20"/><ellipse cx="450" cy="292" rx="46" ry="26" fill="#6E7A80"/><ellipse cx="505" cy="296" rx="30" ry="18" fill="#59656B"/>
+<g fill="#1E9B5A"><path d="M70 300c-10-60 10-100 0-140 20 40 20 90 14 140z"/><path d="M95 300c10-50-4-90 6-130 14 40 10 90 0 130z"/><path d="M385 300c-6-70 10-110 4-150 18 50 16 100 4 150z"/><path d="M410 300c8-40-4-80 8-110 10 40 8 80-2 110z"/></g>
+<rect x="520" y="60" width="26" height="150" rx="6" fill="#0A2A33" opacity=".85"/><rect x="40" y="255" width="12" height="45" rx="5" fill="#E8603F"/>
+<circle cx="300" cy="250" r="9" fill="#0A2A33" opacity=".8"/><g fill="#fff" opacity=".7"><circle class="bub" cx="300" cy="240" r="4"/><circle class="bub" style="animation-delay:-2s" cx="306" cy="230" r="3"/><circle class="bub" style="animation-delay:-3.5s" cx="296" cy="236" r="5"/></g>
+<g fill="#FFD166"><path d="M220 120l22-10v20z"/><circle cx="240" cy="120" r="3" fill="#0A2A33"/></g>
+${h("light",300,25)}${h("plants",82,200)}${h("plants",400,205)}${h("filter",533,100)}${h("wood",230,275)}${h("rocks",450,285)}${h("substrate",300,320)}${h("heater",46,270)}${h("co2",300,250)}</svg>`;
+}
+function landing(){return `
+<header class="hero"><div class="wrap"><div>
+<div class="logo" style="color:#fff">CloudAqua Blueprint™</div>
+<h1>Build your perfect aquarium</h1>
+<p class="tag">Your plan, your shopping list, your roadmap.</p>
+<p>Create a personalised aquarium plan, shopping list and expert recommendations in under three minutes.</p>
+<button class="btn" onclick="document.getElementById('j').scrollIntoView({behavior:'smooth'})">Build My Blueprint</button></div>
+<div class="card" style="padding:10px;background:rgba(255,255,255,.12)">${aq(false)}</div></div></header>
+<main class="wrap"><section class="sec"><div class="grid3">
+<div class="card"><h3>Expert recommendations</h3><p>Every product is chosen for your tank, goals and budget, with the reason shown.</p></div>
+<div class="card"><h3>Complete shopping package</h3><p>One basket with running totals. Remove anything you already own.</p></div>
+<div class="card"><h3>Personal Blueprint PDF</h3><p>Your score, roadmap and maintenance guide, ready to keep or share.</p></div></div></section>
+<section class="sec" id="j"><h2>Where are you starting from?</h2><div class="grid3">
+${[["beg","Beginner","I have never owned an aquarium and need a complete setup."],["exist","Existing aquarium","I already have a tank and want smart upgrades."],["proj","New project","I am experienced and planning a premium build."]].map(x=>`<button class="card jc" onclick="start('${x[0]}')"><h3>${x[1]}</h3><span>${x[2]}</span></button>`).join("")}</div></section></main>`}
+
+function assess(){
+ const st=steps(),q=st[S.step];if(!q)return results();
+ const pct=Math.round(S.step/st.length*100);
+ return `<div class="topbar"><button class="logo" onclick="home()">CloudAqua Blueprint™</button><span>${JN[S.journey]}</span></div>
+<div class="app"><div class="q fade" key="${q.id}"><div class="bar" aria-hidden="true"><i style="width:${pct}%"></i></div>
+<p style="color:var(--mut);margin:14px 0 0">Step ${S.step+1} of ${st.length}</p><h2>${q.t}</h2>
+<div class="opts">${q.o.map(o=>`<button class="opt ${S.a[q.id]===o[0]?"on":""}" onclick="pick('${q.id}','${o[0]}')"><b>${o[1]}</b><small>${o[2]||""}</small></button>`).join("")}</div>
+<div style="margin-top:22px">${S.step>0?`<button class="btn ghost" onclick="S.step--;render()">Back</button>`:""}</div></div>
+${side(st)}</div>`}
+
+function side(st){
+ const p=plan(),a=A(),pct=Math.round(S.step/st.length*100);
+ return `<aside class="side card" aria-label="Live Blueprint"><button class="mob" onclick="S.open=!S.open;render()"><span><b>Blueprint Score ${p.all}%</b></span><span>${GBP(p.tot)} ▴</span></button>
+<h3>Your live Blueprint</h3><div class="more">
+<div class="row"><span>Journey</span><span>${JN[S.journey]}</span></div>
+<div class="row"><span>Goal</span><span>${GOAL[a.goal]}</span></div>
+<div class="row"><span>Tank</span><span>${SIZE[a.size].split(" (")[0]}</span></div>
+<div class="row"><span>Estimated budget</span><span>${GBP(p.tot)}</span></div>
+<div class="row"><span>Products</span><span>${p.inc.length} recommended</span></div>
+<div class="row"><span>Aquarium health</span><span>${health(p).all}%</span></div>
+<div style="margin:16px 0 6px;color:var(--mut)">Blueprint Score</div><div class="big">${p.all}%</div>
+${Object.keys(DIM).map(k=>`<div class="dim"><div><span>${DIM[k]}</span><span>${p.sc[k]}</span></div><div class="bar"><i style="width:${p.sc[k]}%"></i></div></div>`).join("")}
+<div style="margin-top:14px"><div style="color:var(--mut);font-size:.9rem">Progress ${pct}%</div><div class="bar"><i style="width:${pct}%"></i></div></div></div></aside>`}
+
+function results(){
+ const p=plan(),a=A(),pain={algae:"Algae is your biggest worry, so we prioritised steady lighting and a plant-led balance.",time:"Time is tight, so we leaned toward automation and quick routines.",know:"Knowing what to buy is the hard part, so every item below comes with its reason.",look:"Looks matter most, so we boosted your hardscape and plant choices."}[a.pain];
+ const by=z=>p.inc.filter(x=>x.z===z).map(x=>x.n);
+ const road=[["Week 1",["tank","filter","heater","substrate","wood","rocks"],"Set up and start the filter cycle"],["Week 2",["light","plants","co2"],"Install and settle in"]];
+ const mt={min:["Water change every two weeks (20%)","Top off automatically","Test water monthly"],week:["Water change weekly (30%)","Trim plants and wipe glass","Test water every two weeks"],pro:["Water change twice weekly (30–50%)","Dose fertiliser on schedule","Test and log parameters weekly"]}[a.maint];
+ return `<div class="topbar"><button class="logo" onclick="home()">CloudAqua Blueprint™</button><button class="btn ghost" onclick="S.view='assess';S.step=0;render()">Edit answers</button></div>
+<div class="res fade"><div><h1 style="font-size:clamp(2rem,5vw,3.2rem)">Your Blueprint</h1><p style="color:var(--mut)">${JN[S.journey]} · ${GOAL[a.goal]} · ${SIZE[a.size]}. ${pain}</p></div>
+<div class="two"><div class="card"><h2>Blueprint Score</h2><div class="big" style="font-size:4.5rem">${p.all}%</div>
+${Object.keys(DIM).map(k=>`<div class="dim"><div><span>${DIM[k]}</span><span>${p.sc[k]}%</span></div><div class="bar"><i style="width:${p.sc[k]}%"></i></div></div>`).join("")}</div>
+<div class="card aq"><h2>Interactive aquarium</h2>${aq(true)}<div id="det" style="margin-top:14px;min-height:84px;color:var(--mut)">Tap a hotspot to see what goes there and why.</div></div></div>
+${healthCard(p)}<div class="card"><h2>Top recommendations</h2>${p.inc.filter(x=>x.pr<=2).slice(0,4).map(x=>`<div class="item">${thumb(x.id)}<div style="flex:1"><b>${x.n}</b> <span class="pill">${x.pr===1?"Essential":"Important"}</span><small>${meta(x.id)}</small><small>${x.why}</small><small>Impact: ${x.imp}</small></div><b>${GBP(x.cost)}</b></div>`).join("")}</div>
+<div class="card"><h2>Blueprint shopping basket</h2><div id="bk"></div></div>
+<div class="card"><h2>Implementation roadmap</h2><div class="road">
+${road.map(r=>{const l=r[1].flatMap(by);return `<div><b>${r[0]}</b><ul><li>${r[2]}</li>${l.map(n=>`<li>${n}</li>`).join("")}</ul></div>`}).join("")}
+<div><b>Week 4</b><ul><li>Add livestock gradually</li><li>${a.goal==="comm"?"Start with hardy community fish":"Start with a small, peaceful group"}</li></ul></div>
+<div><b>Month 2</b><ul><li>Settle into your schedule</li></ul></div></div></div>
+<div class="card"><h2>Maintenance advice</h2><ul style="margin:0;padding-left:20px">${mt.map(m=>`<li>${m}</li>`).join("")}</ul></div>
+<div class="card"><h2>Email my Blueprint</h2><p style="color:var(--mut)">You will receive your Blueprint PDF, shopping list, maintenance guide and product links.</p>
+<div id="lead"><input type="text" id="n" placeholder="Name" autocomplete="name"><input type="email" id="e" placeholder="Email" autocomplete="email"><input type="tel" id="t" placeholder="Phone (optional)" autocomplete="tel">
+<label style="display:flex;gap:10px;margin:6px 0 16px"><input type="checkbox" id="c"> <span>Send me aquarium tips and offers from CloudAqua.</span></label>
+<button class="btn" onclick="lead()">Email My Blueprint</button> <button class="btn ghost" onclick="toast('PDF export (html2pdf.js, A4, branded) arrives in the full build.')">Download Your Blueprint</button></div></div></div>`}
+
+/* ---------- Behaviour ---------- */
+function basket(){
+ const p=plan();$("#bk").innerHTML=(p.inc.length?p.inc.map(x=>`<div class="item">${thumb(x.id)}<div style="flex:1"><b>${x.n}</b><small>${MOCK[x.id][0]} · ★ ${MOCK[x.id][1]} · In stock</small></div><div style="text-align:right"><b>${GBP(x.cost)}</b><br><button class="rm" onclick="rm('${x.id}')">Remove</button></div></div>`).join(""):"<p>Your basket is empty.</p>")+
+ `<div class="item"><b>Running total</b><b style="font-size:1.3rem">${GBP(p.tot)}</b></div>${p.over?`<p style="color:var(--mut)">Essentials exceed your budget by ${GBP(p.over)}. A smaller tank size would lower this.</p>`:""}
+ <div style="margin-top:14px"><button class="btn" onclick="toast('Prototype: Shopify basket hand-off comes in a later sprint.')">Add Everything to Basket</button></div>`;
+}
+const removed=new Set();
+function rm(id){const i=P.find(x=>x.id===id);i.w=()=>false;toast(i.n+" removed");results_refresh()}
+function results_refresh(){render()}
+function start(j){S.journey=j;S.a={};S.step=0;S.view="assess";render();scrollTo(0,0)}
+function home(){S.view="landing";render()}
+function pick(k,v){S.a[k]=isNaN(v)?v:Number(v);render();setTimeout(()=>{S.step++;render()},260)}
+function lead(){const n=$("#n").value.trim(),e=$("#e").value.trim();if(!n||!/\S+@\S+\.\S+/.test(e)){toast("Enter your name and a valid email.");return}
+ $("#lead").innerHTML=`<p><b>Thanks, ${n.replace(/[<>&]/g,"")}.</b> In the live product, your Blueprint would now be on its way to ${e.replace(/[<>&]/g,"")}. This is a prototype, so nothing was sent or stored.</p>`}
+function toast(m){const t=$("#toast");t.innerHTML=`<div class="toast" role="status">${m}</div>`;setTimeout(()=>t.innerHTML="",3200)}
+function det(z){const p=plan(),x=p.inc.find(i=>i.z===z),el=$("#det");
+ if(x)el.innerHTML=`<b style="color:var(--ink)">${x.n}</b> · ${GBP(x.cost)}<br>${x.why}<br><b style="color:var(--a)">Benefit:</b> ${x.imp}`;
+ else{const o=P.find(i=>i.z===z&&p.own.includes(i.id));el.innerHTML=o?`You already own this. It is counted in your score.`:`Not needed for this Blueprint, based on your goal and budget.`}}
+function render(){
+ if(S.view==="assess"&&!steps()[S.step]){S.view="results";scrollTo(0,0)}const v=S.view;$("#app").innerHTML=v==="landing"?landing():v==="assess"?assess():results();
+ if(v==="results"){basket();document.querySelectorAll(".hs").forEach(h=>{h.onclick=()=>det(h.dataset.z);h.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();det(h.dataset.z)}}})}
+ const sd=document.querySelector(".side");if(sd&&S.open)sd.classList.add("open")}
+render();
+</script>
+</body>
+</html>
